@@ -6,9 +6,9 @@ import Investment from "@/components/Investment";
 import TransactionList from "@/components/TransactionList";
 
 export default function Home() {
-  return (
+	return (
 		<main className="flex flex-col items-center justify-center space-y-4 text-center ">
-			<div className="flex flex-col w-full justify-center gap-4 p-6 mt-4 lg:flex-row lg:gap-8">
+			<div className="flex flex-col w-full justify-center gap-4 mt-4 lg:flex-row lg:gap-8">
 				<Balance />
 				<Expense />
 				<Income />
