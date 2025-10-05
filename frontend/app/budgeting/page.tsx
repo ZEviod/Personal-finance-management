@@ -16,44 +16,6 @@ type Tx = {
   category: string;
 };
 
-const sampleTransactions: Tx[] = [
-  {
-    id: 1,
-    description: "Grocery Shopping",
-    amount: -50,
-    date: "2023-10-01",
-    category: "Food",
-  },
-  {
-    id: 2,
-    description: "Salary",
-    amount: 1500,
-    date: "2023-10-05",
-    category: "Income",
-  },
-  {
-    id: 3,
-    description: "Electricity Bill",
-    amount: -100,
-    date: "2023-10-10",
-    category: "Bills",
-  },
-  {
-    id: 4,
-    description: "Cinema",
-    amount: -25,
-    date: "2023-10-12",
-    category: "Entertainment",
-  },
-  {
-    id: 5,
-    description: "Bus pass",
-    amount: -30,
-    date: "2023-10-08",
-    category: "Transport",
-  },
-];
-
 export default function BudgetingPage() {
   const categories = [
     "Food",
@@ -66,11 +28,11 @@ export default function BudgetingPage() {
   ];
   const [budgets, setBudgets] = useState<Record<string, number>>({});
 
+  // Currently there is no live transaction data passed into this page. Compute totals
+  // from an empty list for now and show onboarding tips where appropriate.
   const totals = useMemo(() => {
     const map: Record<string, number> = {};
-    for (const t of sampleTransactions) {
-      map[t.category] = (map[t.category] || 0) + Math.abs(t.amount);
-    }
+    // If in the future transactions are provided via props or fetched, iterate them here.
     return map;
   }, []);
 
@@ -109,6 +71,19 @@ export default function BudgetingPage() {
         <div className="w-full p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="col-span-2">
             <TransactionList />
+            <div className="mt-4 p-4 bg-white rounded shadow">
+              <h4 className="font-semibold">Getting started</h4>
+              <p className="text-sm text-slate-600 mt-2">
+                Add your first transactions to see budgets and summaries
+                populate. Use the "Add Transaction" option in the sidebar or
+                quick-add button.
+              </p>
+              <ul className="mt-2 list-disc list-inside text-sm text-slate-600">
+                <li>Income: enter positive amounts (e.g. 1500)</li>
+                <li>Expense: enter negative amounts (e.g. -50)</li>
+                <li>Assign a category to track spending</li>
+              </ul>
+            </div>
           </div>
 
           <div className="bg-white p-4 rounded-lg shadow">

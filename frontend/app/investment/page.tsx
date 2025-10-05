@@ -1,3 +1,5 @@
+"use client";
+
 import AddTransaction from "@/components/AddTransaction";
 import Balance from "@/components/Balance";
 import Expense from "@/components/Expense";

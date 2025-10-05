@@ -67,6 +67,10 @@ Below are concise steps to run both parts locally. Commands assume you are in th
 
 3. Open http://localhost:3000 in your browser. The frontend expects the backend to be available at http://localhost:8000 by default.
 
+## Note about sample data and onboarding messages
+
+The frontend previously included static sample transactions and example numbers embedded in several components. Those have been removed so new users see helpful first-time onboarding messages instead of placeholder data. To test locally, start the frontend (`cd frontend; npm install; npm run dev`) and visit the Budgeting or Transactions pages — you'll see tips and guidance when no transactions are present.
+
 Notes:
 
 - Default Next.js port: 3000. You can change it with `PORT=3001 npm run dev`.
@@ -110,7 +114,7 @@ Notes:
 
 ## Troubleshooting
 
-- If the frontend can't reach the backend, ensure the Python server is running on port 8000 and CORS is allowed (the server sets Access-Control-Allow-Origin: * by default).
+- If the frontend can't reach the backend, ensure the Python server is running on port 8000 and CORS is allowed (the server sets Access-Control-Allow-Origin: \* by default).
 - If you get database errors, delete `backend/app/data.db` and restart the server to recreate a fresh database (this will remove demo data).
 
 ## Security & Privacy
