@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Always reserve space for the vertical scrollbar to avoid layout shift
+	 when pages have different heights. */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* Make sure body fills the viewport height */
+body {
+  min-height: 100vh;
+}
