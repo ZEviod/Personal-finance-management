@@ -110,7 +110,7 @@ Notes:
 
 ## Troubleshooting
 
-- If the frontend can't reach the backend, ensure the Python server is running on port 8000 and CORS is allowed (the server sets Access-Control-Allow-Origin: \* by default).
+- If the frontend can't reach the backend, ensure the Python server is running on port 8000 and CORS is allowed (the server sets Access-Control-Allow-Origin: * by default).
 - If you get database errors, delete `backend/app/data.db` and restart the server to recreate a fresh database (this will remove demo data).
 
 ## Security & Privacy
