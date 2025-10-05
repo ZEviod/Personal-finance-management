@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/
+
+# SQLite DB and secret
+app/data.db
+app/secret.key
+
+# Editor
+.vscode/
+*.swp

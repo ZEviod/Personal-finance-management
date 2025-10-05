@@ -1,8 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "tailwindcss/tailwind.css";
+import { getCurrentUser, signOut } from "../lib/utils";
 
 const Header = () => {
+  const [user, setUser] = useState<{ id: number; username: string } | null>(
+    null
+  );
+  useEffect(() => {
+    let mounted = true;
+    getCurrentUser().then((u) => {
+      if (mounted) setUser(u);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
   return (
     <header className="bg-blue-600 text-white p-4 shadow-md">
       <div className="/container px-[2rem] justify-between w-full /mx-auto flex flex-col md:flex-row gap-3 items-center">
@@ -30,6 +44,39 @@ const Header = () => {
             </li>
           ))}
         </ul>
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex gap-2 items-center">
+            {!user ? (
+              // separate sign in and sign up buttons
+              <div className="flex gap-2 items-center">
+                <Link
+                  href="/auth/signin"
+                  className="px-3 py-1 border border-white/20 rounded-md hover:bg-white/10"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="px-3 py-1 bg-white text-blue-600 rounded-md hover:opacity-90"
+                >
+                  Sign up
+                </Link>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 border border-white/20 rounded-md">
+                  Signed in as {user.username}
+                </span>
+                <button
+                  onClick={() => signOut()}
+                  className="px-3 py-1 bg-white text-blue-600 rounded-md hover:opacity-90"
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
         <div className="relative md:flex  hidden items-center justify-center w-full max-w-[20rem] /mx-auto">
           <div className="absolute top-[9px] left-[12px]">
             <svg
