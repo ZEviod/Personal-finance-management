@@ -1,12 +1,29 @@
 "use client";
 import React from "react";
+import Sidebar from "@/components/Sidebar";
 
 const Contact: React.FC = () => {
   const FormSubmittion = (formData: object) => {
     console.log(formData);
   };
   return (
-    <div className="min-h-[80vh] bg-purple-100">
+    <div className="min-h-[80vh] bg-purple-100 flex">
+      <Sidebar
+        onQuickAdd={() => {
+          const el = document.querySelector(
+            "input#title"
+          ) as HTMLInputElement | null;
+          if (el) {
+            el.focus();
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+          } else {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: "smooth",
+            });
+          }
+        }}
+      />
       <div className="w-full justify-between flex p-[1rem] md:p-[3rem]">
         <div className="w-[50%] sm:flex hidden md:w-[50%] lg:w-[60%]  ">
           <div>

@@ -33,7 +33,20 @@ const transactions: Transaction[] = [
 	// Add more transactions as needed
 ];
 
-const TransactionList: React.FC = () => {
+type Props = {
+	search?: string;
+	category?: string;
+	limit?: number;
+};
+
+const TransactionList: React.FC<Props> = ({ search = "", category = "", limit = 50 }) => {
+	const filtered = transactions
+		.filter((t) => (category ? t.category === category : true))
+		.filter(
+			(t) =>
+				`${t.description} ${t.category}`.toLowerCase().indexOf(search.toLowerCase()) !== -1
+		);
+
 	return (
 		<div className="p-4 w-full lg:w-2/3">
 			<h2 className="text-2xl font-bold mb-4">Recent Transactions</h2>
@@ -47,7 +60,7 @@ const TransactionList: React.FC = () => {
 					</tr>
 				</thead>
 				<tbody className="bg-white divide-y divide-gray-200">
-					{transactions.slice(0, 10).map((transaction) => (
+					  {filtered.slice(0, limit).map((transaction) => (
 						<tr key={transaction.id} className="hover:bg-gray-50">
 							<td className="px-4 py-2 ">{transaction.date}</td>
 							<td className="px-4 py-2">{transaction.description}</td>
@@ -59,11 +72,16 @@ const TransactionList: React.FC = () => {
 								{transaction.amount < 0 ? "-" : "+"}$
 								{Math.abs(transaction.amount)}
 							</td>
-							<td className="px-4 py-2 text-gray-600">
-								{transaction.category}
-							</td>
+							<td className="px-4 py-2 text-gray-600">{transaction.category}</td>
 						</tr>
 					))}
+					{filtered.length === 0 && (
+						<tr>
+							<td colSpan={4} className="px-4 py-6 text-center text-slate-500">
+								No transactions found.
+							</td>
+						</tr>
+					)}
 				</tbody>
 			</table>
 		</div>
